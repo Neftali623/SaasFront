@@ -1,0 +1,112 @@
+:root {
+  /* Identidad base Nedaxoli Control */
+  --color-brand-navy: #101D46;
+  --color-brand-purple: #8745E8;
+  --color-brand-cyan: #13C8EE;
+  --color-brand-lavender: #EBDDFB;
+  --color-bg-app: #F8FAFF;
+  --color-surface: #FFFFFF;
+  --color-surface-subtle: #F1F5FD;
+  --color-surface-elevated: #FFFFFF;
+
+  /* Tema dinámico por organización (inicializado con los colores de marca) */
+  --color-org-primary: #8745E8;
+  --color-org-primary-hover: #6F32CC;
+  --color-org-primary-soft: #EBDDFB;
+  --color-org-accent: #13C8EE;
+  --color-org-accent-soft: #E0F9FE;
+
+  /* Texto principal y secundario (contraste accesible WCAG AA sobre fondos claros) */
+  --color-text-primary: #101D46;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748B;
+  --color-text-on-dark: #F8FAFF;
+  --color-text-on-primary: #FFFFFF;
+
+  /* Bordes y divisores */
+  --color-border: #DDE4F2;
+  --color-border-strong: #C2CEE6;
+  --color-border-subtle: #EBF0FA;
+
+  /* Estados semánticos */
+  --color-success: #0D9488;
+  --color-success-soft: #CCFBF1;
+  --color-warning: #B45309;
+  --color-warning-soft: #FEF3C7;
+  --color-danger: #DC2626;
+  --color-danger-soft: #FEE2E2;
+  --color-info: #0284C7;
+  --color-info-soft: #E0F2FE;
+
+  /* Estados de interacción */
+  --color-focus-ring: #13C8EE;
+  --color-focus-outline: #8745E8;
+  --color-hover-surface: #F1F5FD;
+  --color-disabled-bg: #E2E8F0;
+  --color-disabled-text: #94A3B8;
+
+  /* Escala de espaciados */
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-5: 1.25rem;  /* 20px */
+  --space-6: 1.5rem;   /* 24px */
+  --space-8: 2rem;     /* 32px */
+  --space-10: 2.5rem;  /* 40px */
+  --space-12: 3rem;    /* 48px */
+
+  /* Radios de borde */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-full: 9999px;
+
+  /* Sombras discretas */
+  --shadow-xs: 0 1px 2px rgba(16, 29, 70, 0.05);
+  --shadow-sm: 0 2px 6px rgba(16, 29, 70, 0.06), 0 1px 2px rgba(16, 29, 70, 0.04);
+  --shadow-md: 0 6px 16px -4px rgba(16, 29, 70, 0.09), 0 2px 6px -1px rgba(16, 29, 70, 0.05);
+  --shadow-lg: 0 14px 28px -6px rgba(16, 29, 70, 0.14), 0 4px 10px -2px rgba(16, 29, 70, 0.06);
+
+  /* Tipografía de sistema sin dependencia de fuentes externas */
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Code', 'Segoe UI Mono', Consolas, monospace;
+
+  --text-xs: 0.75rem;     /* 12px */
+  --text-sm: 0.875rem;    /* 14px */
+  --text-base: 0.9375rem; /* 15px */
+  --text-md: 1rem;        /* 16px */
+  --text-lg: 1.125rem;    /* 18px */
+  --text-xl: 1.35rem;     /* 21.6px */
+  --text-2xl: 1.65rem;    /* 26.4px */
+
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+
+  /* Dimensiones del layout */
+  --sidebar-width: 268px;
+  --header-height: 68px;
+
+  /* Transiciones breves y sutiles */
+  --transition-fast: 140ms ease;
+  --transition-normal: 200ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-normal: 0ms;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

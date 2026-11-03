@@ -1,0 +1,639 @@
+/* ==========================================================================
+   Módulo de Tickets Personalizables e Impresión Térmica
+   ========================================================================== */
+
+/* Contenedor del Comprobante Térmico */
+.thermal-ticket {
+  background-color: #ffffff;
+  color: #111111;
+  font-family: 'Courier New', Courier, monospace, var(--font-mono);
+  line-height: 1.35;
+  margin: 0 auto;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  box-sizing: border-box;
+  text-align: left;
+  user-select: text;
+}
+
+/* Perfiles de papel térmico en pantalla */
+.thermal-ticket--58mm {
+  width: 100%;
+  max-width: 260px;
+  padding: 12px 10px;
+}
+
+.thermal-ticket--80mm {
+  width: 100%;
+  max-width: 340px;
+  padding: 16px 14px;
+}
+
+/* Opciones de tamaño de fuente */
+.thermal-ticket--font-small {
+  font-size: 11px;
+}
+
+.thermal-ticket--font-normal {
+  font-size: 12px;
+}
+
+.thermal-ticket--font-large {
+  font-size: 13.5px;
+}
+
+/* Banner de Reimpresión / Copia */
+.thermal-ticket__reprint-banner {
+  border: 2px dashed #111111;
+  background-color: #f8fafc;
+  padding: 4px 6px;
+  text-align: center;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.thermal-ticket__reprint-banner strong {
+  font-size: 0.95em;
+  letter-spacing: 0.05em;
+}
+
+.thermal-ticket__reprint-banner small {
+  font-size: 0.8em;
+  color: #475569;
+}
+
+.thermal-ticket__reconstructed-note {
+  text-align: center;
+  font-size: 0.78em;
+  color: #64748b;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+/* Encabezado */
+.thermal-ticket__header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.thermal-ticket__logo-box {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.thermal-ticket__logo {
+  max-width: 140px;
+  max-height: 54px;
+  object-fit: contain;
+  /* Optimización para impresión térmica monocromática */
+  filter: grayscale(100%) contrast(125%);
+}
+
+.thermal-ticket__business-name {
+  font-size: 1.15em;
+  font-weight: 800;
+  margin: 0;
+  color: #000000;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.thermal-ticket__contact-info {
+  font-size: 0.88em;
+  color: #334155;
+  margin-top: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.thermal-ticket__contact-info p {
+  margin: 0;
+  word-break: break-word;
+}
+
+.thermal-ticket__custom-header-msg {
+  font-size: 0.9em;
+  font-style: italic;
+  margin: 4px 0 2px 0;
+  color: #1e293b;
+}
+
+.thermal-ticket__divider {
+  border: none;
+  border-top: 1px dashed #64748b;
+  margin: 8px 0;
+  width: 100%;
+}
+
+.thermal-ticket__divider--thin {
+  border-top: 1px dotted #94a3b8;
+  margin: 4px 0;
+}
+
+.thermal-ticket__doc-title {
+  text-align: center;
+  font-weight: 800;
+  font-size: 0.95em;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.thermal-ticket__meta-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.88em;
+  text-align: left;
+}
+
+.thermal-ticket__meta-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  word-break: break-word;
+}
+
+.thermal-ticket__reason-box {
+  text-align: left;
+  background-color: #f1f5f9;
+  border-left: 2px solid #000000;
+  padding: 4px 6px;
+  margin-top: 4px;
+  font-size: 0.85em;
+}
+
+.thermal-ticket__reason-box p {
+  margin: 2px 0 0 0;
+  font-style: italic;
+}
+
+/* Sección de partidas */
+.thermal-ticket__items-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.thermal-ticket__items-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 0.85em;
+  text-transform: uppercase;
+}
+
+.thermal-ticket__col-desc {
+  flex: 1;
+}
+
+.thermal-ticket__col-qty {
+  width: 60px;
+  text-align: right;
+}
+
+.thermal-ticket__col-total {
+  width: 72px;
+  text-align: right;
+}
+
+.thermal-ticket__items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.thermal-ticket__item-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 4px;
+  font-size: 0.9em;
+}
+
+.thermal-ticket__item-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.thermal-ticket__item-name {
+  display: block;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.thermal-ticket__item-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  font-size: 0.85em;
+  color: #475569;
+}
+
+.thermal-ticket__item-qty {
+  width: 60px;
+  text-align: right;
+  flex-shrink: 0;
+  font-size: 0.9em;
+  display: flex;
+  flex-direction: column;
+}
+
+.thermal-ticket__item-unit-price {
+  font-size: 0.8em;
+  color: #64748b;
+}
+
+.thermal-ticket__item-total {
+  width: 72px;
+  text-align: right;
+  flex-shrink: 0;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Pie y Totales */
+.thermal-ticket__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: center;
+}
+
+.thermal-ticket__totals-box {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+}
+
+.thermal-ticket__total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.9em;
+}
+
+.thermal-ticket__total-row--grand {
+  font-size: 1.15em;
+  font-weight: 800;
+  padding: 4px 0;
+}
+
+.thermal-ticket__payment-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.88em;
+  margin-top: 2px;
+}
+
+.thermal-ticket__custom-footer-msg {
+  font-size: 0.9em;
+  margin: 6px 0 2px 0;
+  font-weight: 600;
+}
+
+.thermal-ticket__return-policy {
+  text-align: left;
+  font-size: 0.8em;
+  color: #334155;
+  background-color: #f8fafc;
+  padding: 6px;
+  border: 1px dotted #cbd5e1;
+  margin-top: 4px;
+}
+
+.thermal-ticket__return-policy-title {
+  font-weight: 700;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.thermal-ticket__return-policy p {
+  margin: 0;
+  line-height: 1.3;
+}
+
+.thermal-ticket__system-tag {
+  font-size: 0.72em;
+  color: #94a3b8;
+  margin: 4px 0 0 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ==========================================================================
+   Layout del Editor de Tickets (Configuración)
+   ========================================================================== */
+
+.ticket-editor-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.95fr);
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.ticket-editor-controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.ticket-editor-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.form-group-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.ticket-editor-options-fieldset {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-4);
+  background-color: var(--color-surface-subtle);
+}
+
+.ticket-checkboxes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.ticket-editor-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.ticket-editor-actions__primary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.ticket-editor-actions__secondary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Columna de vista previa */
+.ticket-editor-preview-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.ticket-preview-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: calc(var(--header-height) + 16px);
+}
+
+.ticket-preview-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.ticket-preview-card__title {
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--color-brand-navy);
+  margin: 0;
+}
+
+.ticket-preview-card__subtitle {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  margin: 2px 0 0 0;
+}
+
+.ticket-preview-card__stage {
+  background-color: var(--color-bg-app);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  padding: var(--space-6) var(--space-3);
+  display: flex;
+  justify-content: center;
+  max-height: 640px;
+  overflow-y: auto;
+}
+
+/* Modal de Tickets */
+.ticket-dialog {
+  max-width: 480px;
+}
+
+.ticket-dialog__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.ticket-dialog__preview-container {
+  background-color: var(--color-bg-app);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-5) var(--space-3);
+  max-height: 520px;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.ticket-dialog__preview-stage {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.ticket-dialog__help-text {
+  font-size: var(--text-xs);
+  line-height: 1.4;
+}
+
+.ticket-dialog__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+/* ==========================================================================
+   ESTILOS DE IMPRESIÓN DESDE NAVEGADOR (@media print)
+   ========================================================================== */
+@media print {
+  /* Ocultar toda la interfaz del SaaS: barra lateral, encabezado, menús, botones, etc. */
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .app-shell,
+  .app-shell__content-area,
+  .sidebar,
+  .panel-header,
+  .page-header,
+  .page-header-actions-group,
+  .metrics-grid,
+  .dev-tools-drawer,
+  .alert-banner,
+  .ticket-editor-controls,
+  .ticket-preview-card__header,
+  .modal-dialog__actions,
+  .ticket-dialog__help-text,
+  .ticket-dialog__header,
+  .ui-btn,
+  button {
+    display: none !important;
+  }
+
+  .modal-backdrop {
+    position: static !important;
+    background: none !important;
+    padding: 0 !important;
+    display: block !important;
+  }
+
+  .modal-dialog {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    max-width: none !important;
+    display: block !important;
+  }
+
+  .ticket-dialog__preview-container {
+    border: none !important;
+    background: none !important;
+    padding: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    display: block !important;
+  }
+
+  .ticket-dialog__preview-stage {
+    display: block !important;
+  }
+
+  /* Renderizado del comprobante térmico para la impresora */
+  .thermal-ticket {
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .thermal-ticket--58mm {
+    max-width: 48mm !important;
+    width: 48mm !important;
+  }
+
+  .thermal-ticket--80mm {
+    max-width: 72mm !important;
+    width: 72mm !important;
+  }
+
+  .thermal-ticket__reprint-banner {
+    border-color: #000000 !important;
+    background: none !important;
+  }
+
+  .thermal-ticket__divider {
+    border-top: 1px dashed #000000 !important;
+  }
+
+  .thermal-ticket__divider--thin {
+    border-top: 1px dotted #000000 !important;
+  }
+
+  .thermal-ticket__reason-box {
+    background: none !important;
+    border-left: 2px solid #000000 !important;
+  }
+
+  .thermal-ticket__return-policy {
+    background: none !important;
+    border-color: #000000 !important;
+  }
+
+  @page {
+    size: auto;
+    margin: 2mm 3mm;
+  }
+}
+
+/* ==========================================================================
+   Ajustes Responsivos para el Editor de Tickets
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .ticket-editor-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .ticket-preview-card {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .ticket-checkboxes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-group-row {
+    flex-direction: column;
+  }
+
+  .ticket-editor-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ticket-editor-actions__primary,
+  .ticket-editor-actions__secondary {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .ticket-editor-actions__primary button,
+  .ticket-editor-actions__secondary button {
+    flex: 1;
+  }
+}
+
